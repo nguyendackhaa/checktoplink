@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra Thứ hạng Google</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container py-4">
+        <header class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary">Kiểm tra Thứ hạng URL trên Google</h1>
+            <p class="lead">Nhập từ khóa và URL để kiểm tra vị trí xếp hạng trong top 100 kết quả Google</p>
+            <a href="/batch" class="btn btn-outline-primary mt-2">Kiểm tra hàng loạt</a>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="rankForm" class="mb-4">
+                            <div class="mb-3">
+                                <label for="keyword" class="form-label">Từ khóa</label>
+                                <input type="text" class="form-control" id="keyword" placeholder="Nhập từ khóa cần kiểm tra" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="url" class="form-label">URL cần kiểm tra</label>
+                                <input type="text" class="form-control" id="url" placeholder="Ví dụ: https://haiphongtech.vn/product/bw20-28/" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="country" class="form-label">Quốc gia</label>
+                                <select class="form-select" id="country">
+                                    <option value="vn">Việt Nam</option>
+                                    <option value="us">Hoa Kỳ</option>
+                                    <option value="jp">Nhật Bản</option>
+                                    <option value="uk">Anh</option>
+                                    <option value="sg">Singapore</option>
+                                    <option value="au">Úc</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100" id="checkButton">
+                                <span class="spinner-border spinner-border-sm d-none" id="loadingSpinner" role="status" aria-hidden="true"></span>
+                                Kiểm tra
+                            </button>
+                        </form>
+                        
+                        <div id="result" class="text-center p-4 d-none">
+                            <div class="rank-circle mx-auto mb-3 d-flex align-items-center justify-content-center">
+                                <span id="rankNumber">-</span>
+                            </div>
+                            <h4 id="rankText" class="mb-3">-</h4>
+                            <p id="rankDetails" class="text-muted">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Lịch sử kiểm tra</h5>
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="refreshHistory">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Từ khóa</th>
+                                    <th>URL</th>
+                                    <th>Quốc gia</th>
+                                    <th>Thứ hạng</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyBody">
+                                <!-- Lịch sử sẽ được hiển thị ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-5">
+            <p class="small text-muted">
+                <a href="/debug" class="text-decoration-none">Debug</a> | <a href="/settings" class="text-decoration-none">Cài đặt</a> | <a href="https://github.com/your-username/google-rank-checker" target="_blank" class="text-decoration-none">GitHub</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 

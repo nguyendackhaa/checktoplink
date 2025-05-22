@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Kiểm tra Thứ hạng Google</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        .nav-tabs .nav-link {
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+        .debug-section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <header class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-primary">Debug - Kiểm tra Thứ hạng Google</h1>
+            <p class="lead">Thông tin chi tiết về lần tìm kiếm gần nhất</p>
+            <a href="/" class="btn btn-outline-primary mt-2">Quay lại trang chính</a>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <ul class="nav nav-tabs" id="debugTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="html-tab" data-bs-toggle="tab" data-bs-target="#html" type="button" role="tab" aria-controls="html" aria-selected="true">HTML Kết quả</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="selectors-tab" data-bs-toggle="tab" data-bs-target="#selectors" type="button" role="tab" aria-controls="selectors" aria-selected="false">Phân tích Selector</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="urls-tab" data-bs-toggle="tab" data-bs-target="#urls" type="button" role="tab" aria-controls="urls" aria-selected="false">URL Tìm thấy</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="useragent-tab" data-bs-toggle="tab" data-bs-target="#useragent" type="button" role="tab" aria-controls="useragent" aria-selected="false">User-Agent</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-3 border border-top-0 rounded-bottom" id="debugTabContent">
+                    <!-- Tab HTML -->
+                    <div class="tab-pane fade show active" id="html" role="tabpanel" aria-labelledby="html-tab">
+                        <div class="alert alert-info">
+                            Hiển thị 5000 ký tự đầu tiên của HTML để tránh quá tải. Bạn có thể tải xuống toàn bộ file HTML.
+                        </div>
+                        <pre>{{ last_search_html }}</pre>
+                        <p class="mt-3">
+                            <a href="/data/last_search.html" download class="btn btn-sm btn-primary">Tải về toàn bộ HTML</a>
+                        </p>
+                    </div>
+                    
+                    <!-- Tab Selectors -->
+                    <div class="tab-pane fade" id="selectors" role="tabpanel" aria-labelledby="selectors-tab">
+                        <div class="alert alert-info">
+                            Thông tin chi tiết về các selector đã được dùng để tìm kiếm URL trong kết quả Google.
+                        </div>
+                        <pre id="selectorsContent">Đang tải...</pre>
+                    </div>
+                    
+                    <!-- Tab URLs -->
+                    <div class="tab-pane fade" id="urls" role="tabpanel" aria-labelledby="urls-tab">
+                        <div class="alert alert-info">
+                            Danh sách tất cả các URL đã được tìm thấy trong kết quả Google.
+                        </div>
+                        <pre id="urlsContent">Đang tải...</pre>
+                    </div>
+                    
+                    <!-- Tab User-Agent -->
+                    <div class="tab-pane fade" id="useragent" role="tabpanel" aria-labelledby="useragent-tab">
+                        <div class="alert alert-info">
+                            Thông tin về User-Agent và URL được sử dụng trong lần tìm kiếm gần nhất.
+                        </div>
+                        <pre id="uaContent">Đang tải...</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Tải nội dung cho tab Selectors
+            const selectorsTab = document.getElementById('selectors-tab');
+            selectorsTab.addEventListener('click', function() {
+                fetch('/data/selectors_debug.txt')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('File không tồn tại hoặc chưa được tạo');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById('selectorsContent').textContent = data;
+                    })
+                    .catch(error => {
+                        document.getElementById('selectorsContent').textContent = 'Lỗi: ' + error.message;
+                    });
+            });
+            
+            // Tải nội dung cho tab URLs
+            const urlsTab = document.getElementById('urls-tab');
+            urlsTab.addEventListener('click', function() {
+                fetch('/data/all_found_urls.txt')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('File không tồn tại hoặc chưa được tạo');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById('urlsContent').textContent = data;
+                    })
+                    .catch(error => {
+                        document.getElementById('urlsContent').textContent = 'Lỗi: ' + error.message;
+                    });
+            });
+            
+            // Tải nội dung cho tab User-Agent
+            const uaTab = document.getElementById('useragent-tab');
+            uaTab.addEventListener('click', function() {
+                fetch('/data/last_ua.txt')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('File không tồn tại hoặc chưa được tạo');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        document.getElementById('uaContent').textContent = data;
+                    })
+                    .catch(error => {
+                        document.getElementById('uaContent').textContent = 'Lỗi: ' + error.message;
+                    });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,19 @@
+URL cần tìm: https://haiphongtech.vn/product/BW40-18/
+Normalized URL: haiphongtech.vn/product/bw40-18
+Domain cần tìm: haiphongtech.vn
+Trang: 1 (offset: 0)
+
+Selector 'div.g': 0 phần tử
+Selector 'div.Gx5Zad': 0 phần tử
+Selector 'div.N54PNb': 0 phần tử
+Selector 'div.yuRUbf': 0 phần tử
+Selector 'div[data-hveid]': 0 phần tử
+Selector 'div.srKDX': 0 phần tử
+Selector 'div.MjjYud': 0 phần tử
+Selector 'div.kb0PBd': 0 phần tử
+Selector 'div.hlcw0c': 0 phần tử
+Selector 'div.g.tF2Cxc': 0 phần tử
+Selector 'div.g.Pg70bf': 0 phần tử
+Selector '.LC20lb': 0 phần tử
+Selector '.kvH3mc': 0 phần tử
+Selector '.kCrYT': 0 phần tử

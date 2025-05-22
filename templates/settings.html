@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - Kiểm tra Thứ hạng Google</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .form-switch {
+            padding-left: 2.5em;
+        }
+        .api-section {
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #dee2e6;
+        }
+        .api-section.disabled {
+            opacity: 0.6;
+        }
+        .form-text {
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <header class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary">Cài đặt</h1>
+            <p class="lead">Cấu hình API và phương pháp tìm kiếm</p>
+            <a href="/" class="btn btn-outline-primary mt-2">Quay lại trang chính</a>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Cấu hình tìm kiếm</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <h5 class="alert-heading">Thứ tự tìm kiếm</h5>
+                            <p class="mb-0">Hệ thống sẽ thử lần lượt các phương pháp tìm kiếm theo thứ tự: SerpAPI → ScraperAPI → BrightData → OpenAI → Trực tiếp (nếu được bật).</p>
+                        </div>
+                        
+                        <!-- API SerpAPI -->
+                        <div class="api-section" id="serpapi-section">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="useSerpAPI">
+                                <label class="form-check-label fw-bold" for="useSerpAPI">Sử dụng SerpAPI</label>
+                            </div>
+                            <p class="text-muted">SerpAPI cung cấp API tìm kiếm Google đáng tin cậy với 100 tìm kiếm miễn phí mỗi tháng</p>
+                            
+                            <div class="mb-3">
+                                <label for="serpapiKey" class="form-label">SerpAPI Key</label>
+                                <input type="password" class="form-control" id="serpapiKey" placeholder="Nhập API key của SerpAPI">
+                                <div class="form-text">Đăng ký tại <a href="https://serpapi.com" target="_blank">https://serpapi.com</a></div>
+                            </div>
+                        </div>
+                        
+                        <!-- API ScraperAPI -->
+                        <div class="api-section" id="scraperapi-section">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="useScraperAPI">
+                                <label class="form-check-label fw-bold" for="useScraperAPI">Sử dụng ScraperAPI</label>
+                            </div>
+                            <p class="text-muted">ScraperAPI cung cấp proxy và xử lý CAPTCHA với 1000 tìm kiếm miễn phí</p>
+                            
+                            <div class="mb-3">
+                                <label for="scraperapiKey" class="form-label">ScraperAPI Key</label>
+                                <input type="password" class="form-control" id="scraperapiKey" placeholder="Nhập API key của ScraperAPI">
+                                <div class="form-text">Đăng ký tại <a href="https://www.scraperapi.com" target="_blank">https://www.scraperapi.com</a></div>
+                            </div>
+                        </div>
+                        
+                        <!-- API BrightData -->
+                        <div class="api-section" id="brightdata-section">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="useBrightData">
+                                <label class="form-check-label fw-bold" for="useBrightData">Sử dụng BrightData</label>
+                            </div>
+                            <p class="text-muted">BrightData cung cấp proxy cao cấp để truy cập Google mà không bị chặn</p>
+                            
+                            <div class="mb-3">
+                                <label for="brightUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="brightUsername" placeholder="Nhập username BrightData">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="brightPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="brightPassword" placeholder="Nhập password BrightData">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="brightHost" class="form-label">Host</label>
+                                <input type="text" class="form-control" id="brightHost" placeholder="Nhập host BrightData" value="brd.superproxy.io">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="brightPort" class="form-label">Port</label>
+                                <input type="text" class="form-control" id="brightPort" placeholder="Nhập port BrightData" value="22225">
+                            </div>
+                            
+                            <div class="form-text">Đăng ký tại <a href="https://brightdata.com" target="_blank">https://brightdata.com</a></div>
+                        </div>
+                        
+                        <!-- API OpenAI -->
+                        <div class="api-section" id="openai-section">
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="useOpenAI">
+                                <label class="form-check-label fw-bold" for="useOpenAI">Sử dụng OpenAI để phân tích</label>
+                            </div>
+                            <p class="text-muted">Sử dụng trí tuệ nhân tạo để phân tích kết quả tìm kiếm HTML và trích xuất thứ hạng chính xác</p>
+                            
+                            <div class="mb-3">
+                                <label for="openaiKey" class="form-label">OpenAI API Key</label>
+                                <input type="password" class="form-control" id="openaiKey" placeholder="Nhập API key của OpenAI">
+                                <div class="form-text">Đăng ký tại <a href="https://platform.openai.com" target="_blank">https://platform.openai.com</a></div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-primary px-4" id="saveSettings">Lưu cài đặt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const useSerpAPI = document.getElementById('useSerpAPI');
+            const useScraperAPI = document.getElementById('useScraperAPI');
+            const useBrightData = document.getElementById('useBrightData');
+            const useOpenAI = document.getElementById('useOpenAI');
+            
+            const serpapiKey = document.getElementById('serpapiKey');
+            const scraperapiKey = document.getElementById('scraperapiKey');
+            const brightUsername = document.getElementById('brightUsername');
+            const brightPassword = document.getElementById('brightPassword');
+            const brightHost = document.getElementById('brightHost');
+            const brightPort = document.getElementById('brightPort');
+            const openaiKey = document.getElementById('openaiKey');
+            
+            const saveSettings = document.getElementById('saveSettings');
+            
+            // Hàm để cập nhật trạng thái active của section
+            function updateSections() {
+                // SerpAPI
+                const serpapiSection = document.getElementById('serpapi-section');
+                serpapiSection.classList.toggle('disabled', !useSerpAPI.checked);
+                serpapiKey.disabled = !useSerpAPI.checked;
+                
+                // ScraperAPI
+                const scraperapiSection = document.getElementById('scraperapi-section');
+                scraperapiSection.classList.toggle('disabled', !useScraperAPI.checked);
+                scraperapiKey.disabled = !useScraperAPI.checked;
+                
+                // BrightData
+                const brightdataSection = document.getElementById('brightdata-section');
+                brightdataSection.classList.toggle('disabled', !useBrightData.checked);
+                brightUsername.disabled = !useBrightData.checked;
+                brightPassword.disabled = !useBrightData.checked;
+                brightHost.disabled = !useBrightData.checked;
+                brightPort.disabled = !useBrightData.checked;
+                
+                // OpenAI
+                const openaiSection = document.getElementById('openai-section');
+                openaiSection.classList.toggle('disabled', !useOpenAI.checked);
+                openaiKey.disabled = !useOpenAI.checked;
+            }
+            
+            // Thêm event listeners cho các checkbox
+            useSerpAPI.addEventListener('change', updateSections);
+            useScraperAPI.addEventListener('change', updateSections);
+            useBrightData.addEventListener('change', updateSections);
+            useOpenAI.addEventListener('change', updateSections);
+            
+            // Tải cài đặt hiện tại
+            fetch('/config')
+                .then(response => response.json())
+                .then(data => {
+                    useSerpAPI.checked = data.USE_SERPAPI || false;
+                    useScraperAPI.checked = data.USE_SCRAPERAPI || false;
+                    useBrightData.checked = data.USE_BRIGHTDATA || false;
+                    useOpenAI.checked = data.USE_OPENAI || false;
+                    
+                    serpapiKey.value = data.SERPAPI_KEY || '';
+                    scraperapiKey.value = data.SCRAPERAPI_KEY || '';
+                    brightUsername.value = data.BRIGHTDATA_USERNAME || '';
+                    brightPassword.value = data.BRIGHTDATA_PASSWORD || '';
+                    brightHost.value = data.BRIGHTDATA_HOST || 'brd.superproxy.io';
+                    brightPort.value = data.BRIGHTDATA_PORT || '22225';
+                    openaiKey.value = data.OPENAI_API_KEY || '';
+                    
+                    // Cập nhật trạng thái các section
+                    updateSections();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải cài đặt:', error);
+                    alert('Đã xảy ra lỗi khi tải cài đặt. Vui lòng thử lại sau.');
+                });
+            
+            // Lưu cài đặt
+            saveSettings.addEventListener('click', function() {
+                const config = {
+                    USE_SERPAPI: useSerpAPI.checked,
+                    SERPAPI_KEY: serpapiKey.value,
+                    
+                    USE_SCRAPERAPI: useScraperAPI.checked,
+                    SCRAPERAPI_KEY: scraperapiKey.value,
+                    
+                    USE_BRIGHTDATA: useBrightData.checked,
+                    BRIGHTDATA_USERNAME: brightUsername.value,
+                    BRIGHTDATA_PASSWORD: brightPassword.value,
+                    BRIGHTDATA_HOST: brightHost.value,
+                    BRIGHTDATA_PORT: brightPort.value,
+                    
+                    USE_OPENAI: useOpenAI.checked,
+                    OPENAI_API_KEY: openaiKey.value
+                };
+                
+                fetch('/config', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(config)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Cài đặt đã được lưu thành công!');
+                    } else {
+                        alert('Đã xảy ra lỗi khi lưu cài đặt: ' + (data.message || 'Lỗi không xác định'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi lưu cài đặt:', error);
+                    alert('Đã xảy ra lỗi khi lưu cài đặt. Vui lòng thử lại sau.');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

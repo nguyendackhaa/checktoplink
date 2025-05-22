@@ -1,0 +1,35 @@
+URL cần tìm: https://haiphongtech.vn/product/BW40-20/
+Normalized URL: haiphongtech.vn/product/bw40-20
+Domain cần tìm: haiphongtech.vn
+Root domain: haiphongtech.vn
+Trang: 2 (offset: 10)
+
+Selector 'div.g': 0 phần tử
+Selector 'div.Gx5Zad': 0 phần tử
+Selector 'div.N54PNb': 0 phần tử
+Selector 'div.yuRUbf': 0 phần tử
+Selector 'div[data-hveid]': 0 phần tử
+Selector 'div.srKDX': 0 phần tử
+Selector 'div.MjjYud': 0 phần tử
+Selector 'div.kb0PBd': 0 phần tử
+Selector 'div.hlcw0c': 0 phần tử
+Selector 'div.g.tF2Cxc': 0 phần tử
+Selector 'div.g.Pg70bf': 0 phần tử
+Selector '.LC20lb': 0 phần tử
+Selector '.kvH3mc': 0 phần tử
+Selector '.kCrYT': 0 phần tử
+Selector 'div.v5yQqb': 0 phần tử
+Selector 'div.lyLwlc': 0 phần tử
+Selector 'div.sATSHe': 0 phần tử
+Selector 'div.nfSF8e': 0 phần tử
+Selector 'a.cz88f8': 0 phần tử
+Selector 'a.DaLSR': 0 phần tử
+Selector 'div.fP1Qef': 0 phần tử
+Selector 'div.egMi0': 0 phần tử
+Selector 'div.jtfYYd': 0 phần tử
+Selector 'div.Z26q7c': 0 phần tử
+Selector 'div.VuuXrf': 0 phần tử
+Selector 'div.byrV5b': 0 phần tử
+Selector 'cite.iUh30': 0 phần tử
+Selector 'span.qXLe6d': 0 phần tử
+Selector 'span.fYyStc': 0 phần tử

@@ -1,0 +1,63 @@
+/* Custom styles */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.rank-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    background-color: #0d6efd;
+}
+
+.rank-circle.not-found {
+    background-color: #dc3545;
+    font-size: 2rem;
+    padding: 10px;
+}
+
+#rankNumber {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.limited-url {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .rank-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 2.5rem;
+    }
+    
+    #rankNumber {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .rank-circle {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+    }
+    
+    #rankNumber {
+        font-size: 2.5rem;
+    }
+    
+    .limited-url {
+        max-width: 150px;
+    }
+} 

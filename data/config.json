@@ -1,0 +1,13 @@
+{
+  "USE_SERPAPI": false,
+  "SERPAPI_KEY": "",
+  "USE_SCRAPERAPI": true,
+  "SCRAPERAPI_KEY": "",
+  "USE_BRIGHTDATA": false,
+  "BRIGHTDATA_USERNAME": "your_username",
+  "BRIGHTDATA_PASSWORD": "",
+  "BRIGHTDATA_HOST": "brd.superproxy.io",
+  "BRIGHTDATA_PORT": "22225",
+  "USE_OPENAI": false,
+  "OPENAI_API_KEY": ""
+}
